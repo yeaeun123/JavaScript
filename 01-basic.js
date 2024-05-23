@@ -5,7 +5,8 @@
 */
 
 // console 객체 : 출력 장치에 로그 레벨별로 로그를 출력하는 객체
-// FATAL (심각)- ERROR (에러) - WARN (경고)- NORMAL (log, info), DEBUG(디버그)
+// Log Levels : 일반 : FATAL (심각)- ERROR (에러) - WARN (경고)- NORMAL (log, info)
+// Log Levels : 디버깅 : DEBUG(디버그)
 console.info("정보 메세지 출력");
 console.debug("디버그 메세지 출력");
 console.log("일반 메세지");

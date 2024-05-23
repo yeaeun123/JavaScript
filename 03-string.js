@@ -7,7 +7,7 @@ console.log(typeof s1, typeof s2);  //string string
 // .length : 문자열 길이 확인하는 속성
 console.log("String : ", s1, ", length : ", s1.length); //26글자
 
-
+console.log("\n=========== 문자열 메서드들")
 // 문자열 추출 메서드
 console.log(s1.charAt(7)); // J 출력->charAt (index(0부터시작) 7번째 글자 추출)
 // 특정 인덱스에 위치한 문자 추출 :charAt
@@ -53,7 +53,8 @@ console.log(s1, ", ", s1_changed); // 별도의 변수 사용해야함
 // 화이트 스페이스(공백, 탭, 개행 등) 제거 
 console.log("        Hello            ".trim()); //.trim() 화이트 스페이스 제거
 
-// ES string 보충
+console.log("\n ================ 이스케이프 문자열")
+// ES string 보충 
 // 이스케이프 -> 키보드로 입력 불가하거나 특수한 의미를 가진 문자 (\로 표기)
 //   \n : 개행
 //   \t : 탭
@@ -72,6 +73,7 @@ console.log(message);
 message = 'I\'m going';
 console.log(message);
 
+console.log("============= 여러 줄 문자열");
 // 여러 줄 문자열
 message = "예전에는 \n"+
             "여러 줄 문자열을 만드는 것이 \n"+
@@ -85,4 +87,13 @@ message = `하지만 ES6 이상에서는
 여러 줄 문자열을 만들 수 있습니다.`;
 console.log(message);
 
+console.log("\n================ Template 문자열 ");
+let temp = 24;
+// 현재 실내 온도는     도 입니다. 를 출력하고싶다면?
+message = "현재 실내 온도는 "+ temp + "도입니다.";
+console.log(message);
 
+// ${변수명} or ${연산식} -> 실행 결과가 문자열에 포함된다. 
+// 문자열은 ``(백틱)으로 묶어야함
+message = `현재 실내 온도는 ${temp}도 입니다.`;
+console.log(message);
