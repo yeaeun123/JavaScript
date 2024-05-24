@@ -27,10 +27,13 @@ console.log(Boolean("JavaScript"), Boolean(""));    //true, false // string데�
 console.log(Boolean(2024), Boolean(0));     //true, false // number데이터
 
 
+// Short-Curcuit 선택 기법
+// Front-End 선택적 렌더링 
+
 console.log(true && "Test");    //Test 출력
 console.log(false && "Test");   // false 출력
 console.log(false && "");   //false 출력
 
-console.log(true || "Test");
-console.log(false || "Test");
+console.log(true || "Test");    //true 출력
+console.log(false || "Test");   //Test 출력 
 

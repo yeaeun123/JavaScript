@@ -97,3 +97,4 @@ console.log(message);
 // 문자열은 ``(백틱)으로 묶어야함
 message = `현재 실내 온도는 ${temp}도 입니다.`;
 console.log(message);
+
