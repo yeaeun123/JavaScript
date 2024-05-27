@@ -38,9 +38,40 @@ console.log("=================== 객체 전개 연산");
 let obj1 = { one: 1, two: 2, other: 0};
 let obj2 = { three: 3, four: 4, other: -1};
 
-console.log("obj1:",obj1);
-console.log("obj2:",obj2);
+console.log("obj1:", obj1);
+console.log("obj2:", obj2);
 
+// 기존 방식 : 방법 1 (권장하지 않음)
+combined = {
+    one: obj1.one,
+    two: obj1.two,
+    three: obj2.three,
+    four: obj2.four,
+    other: obj1.other
+};
+console.log("기존방식 1 : ", combined);
 
+// 기존 방식: 방법 2
+combined = Object.assign({}, obj1, obj2);
+// combined = Object.assign({}, obj2, obj1);
+console.log("기존방식2:", combined); 
+// 기존방식2: { one: 1, two: 2, other: -1, three: 3, four: 4 } 
+// 기존방식2: { three: 3, four: 4, other: 0, one: 1, two: 2 }
+// assign 순서에 따라 나중에 오는 other로 덮어쓰기됨
 
+// 전개 연산자
+combined = {
+    ...obj1,    // obj1의 모든 속성을 전개
+    ...obj2    // obj2의 모든 속성을 전개
+};  // 전개 순서에 유의 ! 
+console.log("전개연산자 활용: ", combined);
+//전개연산자 활용:  { one: 1, two: 2, other: -1, three: 3, four: 4 }
 
+// 특정 속성 제거 
+delete combined.other; // other 속성 제거
+console.log(combined);
+
+// 객체 속성 전개
+let { one, three, five, ...rest} = combined;
+console.log(one, three, five, rest); //1 3 undefined { two: 2, four: 4 }
+// five=undefined
