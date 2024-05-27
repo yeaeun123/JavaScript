@@ -74,4 +74,5 @@ console.log(combined);
 // 객체 속성 전개
 let { one, three, five, ...rest} = combined;
 console.log(one, three, five, rest); //1 3 undefined { two: 2, four: 4 }
-// five=undefined
+                                    // five = undefined
+

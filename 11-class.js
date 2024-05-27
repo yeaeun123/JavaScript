@@ -43,4 +43,5 @@ let s = new Shape(10, 20);
 console.log(s, s.area()); // Shape { name: 'Shape', x: 10, y: 20 } 0
 
 let c = new Circle(30, 40, 10);
-console.log(c, c.area()); //Circle { name: 'Shape', x: 30, y: 40, radius: 10 } 0
+console.log(c, c.area()); //Circle { name: 'Shape', x: 30, y: 40, radius: 10 } 314.1592653589793
+
