@@ -8,7 +8,7 @@ for(let dan = 2; dan <=9 ; dan++){
 console.log(dan,"*",num,"=",dan * num);
     }
     console.log();
-}
+};
 
 // - while문 버전
 let dan = 2;
@@ -22,7 +22,7 @@ while(dan <= 9){
     }
     console.log();
     dan++;
-}
+};
 
 
 // 연습문제 2.
@@ -44,7 +44,7 @@ for(let c = 5; c > 0; c--){
         r += "*";
     }
     console.log(r);
-}
+};
 
 
 // - while문 버전
@@ -59,4 +59,21 @@ while(e > 0){
     }
     console.log(result);
     e--;
-} 
+};
+
+// for ... in : 객체의 속성 키를 반복
+const obj = {
+    name: "홍길동", 
+    age: 28,
+    job: "도적"
+};
+
+for (let key in obj){
+    console.log(`${key} -> ${obj[key]}`);
+};
+
+// for ... of : 배열을 순회
+const arr = [1, 2, 3, 4, 5];
+for (let item of arr){
+    console.log(item);
+};
