@@ -7,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <!--Page Script-->
-    <!-- <script>
-        let name = prompt("이름을 입력해주세요.");
-    </script> -->
+    <script>
+        // let name = prompt("이름을 입력해주세요.");
+    </script>
 
     <!-- External Script -->
     <script src="script/ask.js"></script>
@@ -32,6 +32,13 @@
             newWin.close();
             }
         }
+
+        function printInner(){
+            let message = `현재 윈도우 창의 크기는 ${window.innerWidth}`
+                + `x${window.innerHeight}`;
+            alert(message);
+        }
+
     </script>
 </head>
 
@@ -43,11 +50,11 @@
         <li><a href="javascript:openWindow();">새 창 열기</a></li>
         <li><a href="javascript:closeWindow();">열린 창 닫기</a></li>
 
-        <li>지금 브라우저의 크기는?</li>
+        <li><a href="javascript:printInner();">지금 브라우저의 크기는?</a></li>
     </ul>
-    <!-- <script>
-        document.write(`안녕하세요, ${name}님`);
-    </script> -->
+    <script>
+        // document.write(`안녕하세요, ${name}님`);
+    </script> 
     <script src="script/print.js"></script>
 </body>
 
