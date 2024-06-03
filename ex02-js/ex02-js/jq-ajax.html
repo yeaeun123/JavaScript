@@ -103,7 +103,7 @@
                     })
         });
    
-        
+    });
                    
 /*
                     fetch("http://localhost:3000/movies")
@@ -143,6 +143,42 @@
          // - http://localhost:3000/movies/11
          // - 개별 영화 정보를 ajax로 받아와서 HTML에 동적으로 생성하여 DOM에 추가하는 코드
 
+         $("#btnCallMovies").on("click", event => {
+          fetch("http://localhost:3000/movies")
+             .then(response => response.json())
+             .then(data => {
+            console.log(data);  // JSON 데이터
+
+            // 영화 목록 정보
+            const movies = data.movies;
+
+            // 기존 목록 초기화
+            $("#list").empty();
+
+            // loop를 사용하여 각 영화 정보 처리
+            movies.forEach(movie => {
+                // 영화 정보
+                const { id, title, director, image, year } = movie;
+                const poster = `http://localhost:3000/images/${image}`;
+
+                // tr 요소를 생성 -> 정보 연결 -> table#list의 자식 요소로 추가
+                const tr = $("<tr>").attr("data-movie-id", id);  // tr 요소 생성 및 data-movie-id 속성 설정
+                tr.html(`
+                    <td><img src="${poster}" class="poster"></td>
+                    <td>${title}</td>
+                    <td>${director}</td>
+                    <td>${year}</td>`
+                );
+
+                // 부모에 자식으로 추가
+                $("#list").append(tr);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);  // 오류 발생 시 콘솔에 출력
+        });
+});
+
     $(document).on("click", "#list tr", function() {
     // 선택된 tr의 영화 ID 가져오기
     const movieId = $(this).attr("data-movie-id");
@@ -174,7 +210,7 @@
         }
     });
 });
-});
+
 
         
     </script>
