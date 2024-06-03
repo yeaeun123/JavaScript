@@ -20,7 +20,7 @@
             $("#btnCallSnippet").on("click", event => {
                 // Ajax로 snippet.html 호출
                 // option을 JavaScript 객체로 전달
-                $.ajax({
+             /*   $.ajax({
                     url: "snippet.html", // 호출할 URL
                     type: "GET",    // 요청의 타입
                     //data:         // 서버로 전송할 데이터
@@ -36,9 +36,27 @@
                         // error : 에러의 상세 정보
                         console.error(error);
                     }
+                });
+            */
+                // ES는 비동기통신을 위한 표준 함수 fetch를 내장했음 
+                // -> 세밀한 통신제어를 위해서는 axios (라이브러리) 추천
+                // -> 일반적 통신제어를 위해서는 fetch 함수를 활용
 
+                // fetch(url, options)
+                fetch("snippet.html")
+                .then(response => {
+                    console.log(response);
+                    return response.text();
+                })
+                .then(data => {
+                    console.log(data);
+                    $("#info").html(data);
+                })
+                .catch(error => {
+                    console.error(error);
                 });
             });
+
             // #btnCallMovies에 click 이벤트
         $("#btnCallMovies").on("click", event => {
                 // localhost:3000/movies -> json
@@ -81,36 +99,84 @@
                 },
                 error: function(request, status, error){
                     console.error(error);
-                }
-            });
-            // 실습:
-            // - http://localhost:3000/movies/11
-            // - 개별 영화 정보를 ajax로 받아와서 HTML에 동적으로 생성하여 DOM에 추가하는 코드
-            tr.on("click", event => {
-                $.ajax({ 
-                url: `http://localhost:3000/movies/${movie.id}`,
-                type: "GET",
-                dataType: "json",       
-                success: function (response){
-                    $("#movieDetails").html(` <h2>${movieDetails.title}</h2>
-                                            <p><strong>Director:</strong> ${movieDetails.director}</p>
-                                            <p><strong>Year:</strong> ${movieDetails.year}</p>
-                                            <p><strong>Description:</strong> ${movieDetails.desc}</p>
-                                            <img src="http://localhost:3000/images/${movieDetails.image}" class="poster">
-                                        `)
-                },
-                error: function(request,status,error){
-                    console.error(error);
-                }
-
-                });
-            });
-
-            
+                     }
+                    })
         });
+   
+        
+                   
+/*
+                    fetch("http://localhost:3000/movies")
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        
+                        const movies = data.movies;
+
+                        for(let i = 0; i < movies.length; i++) {
+                            let movie = movies[i];
+
+                            let title = movie.title;
+                            let director = movie.director;
+                            let poster = "http://localhost:3000/images/" + movie.image;
+                            console.log(title, director, poster);
+
+                            const tr = $("<tr>");
+                                tr.html(`
+                                    <td><img src="${poster}" class="poster"></td>
+                                    <td>${title}</td>
+                                    <td>${director}</td>`);
+
+                            $("#list").append(tr);
+                                
+                        }
+
+                    })
+                    .catch(error =>{
+                        console.error(error);
+                    });
+                
+            });
+        });
+*/
+         // 실습:
+         // - http://localhost:3000/movies/11
+         // - 개별 영화 정보를 ajax로 받아와서 HTML에 동적으로 생성하여 DOM에 추가하는 코드
+
+    $(document).on("click", "#list tr", function() {
+    // 선택된 tr의 영화 ID 가져오기
+    const movieId = $(this).attr("data-movie-id");
+    // 개별 영화 정보를 가져오는 URL
+    const movieUrl = `http://localhost:3000/movies/${movieId}`;
+    
+    // 새 창 열기
+    const newWindow = window.open("", "_blank");
+
+    // Ajax 요청
+    $.ajax({
+        url: movieUrl,
+        type: "GET",
+        dataType: "json",
+        success: function(movie) {
+            console.log(movie); // 개별 영화 정보
+
+
+            // 새 창에 영화 정보 표시
+            newWindow.document.write(`
+                <p>감독: ${movie.director}</p>
+                <img src="http://localhost:3000/images/${movie.image}">
+                <p>개봉일: ${movie.year}</p>
+            `);
+            newWindow.document.close();
+        },
+        error: function(request, status, error) {
+            console.error(error); // 에러 메시지 출력
+        }
     });
+});
+});
 
-
+        
     </script>
 </head>
 <body>
