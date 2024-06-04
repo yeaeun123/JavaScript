@@ -43,8 +43,10 @@
     <button id="deleteSessionStorage">Delete User Info</button>
     <div id="sessionStorageResult"></div>
 
-    <script>
+    <script> // LocalStorage와 SessionStorage의 차이점 
         // LocalStorage Handlers - User Settings
+        // 브라우저를 닫아도 데이터 유지
+        // 사용자설정, 장기적인 데이터 저장
         document.getElementById("saveLocalStorage")
         .addEventListener("click", function(event) {
             const theme = document.getElementById("theme").value;
@@ -55,8 +57,8 @@
                 localStorage.setItem("theme", theme);
                 localStorage.setItem("fontSize", fontSize);
 
-                document.getElementById("localStorageResult")
-                .innerText = `Theme : ${theme}, FontSize : ${fontSize}`;
+                alert(`Theme : ${theme}, FontSize : ${fontSize} 가 저장되었습니다.`);
+            
             } else {
                 alert("테마와 폰트사이즈를 입력해주세요.");
             }
@@ -85,12 +87,50 @@
             localStorage.removeItem("fontSize");
 
             document.getElementById("localStorageResult")
-            .innerText("설정이 삭제되었습니다.");
+            .innerText = "설정이 삭제되었습니다.";
         });
 
 
         // SessionStorage Handlers - User Information
+        // 브라우저 탭이나 창을 닫으면 데이터가 삭제됨
+        // 일시적인 데이터 저장
+        document.getElementById("saveSessionStorage")
+        .addEventListener("click", function(event) {
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
 
+            if(username && email){
+                sessionStorage.setItem("username", username);
+                sessionStorage.setItem("email", email);
+
+                alert(`SessionStorage에 저장 :Username: ${username}, Email : ${email} `);
+            } else {
+                alert("사용자와 이메일을 입력해주세요.");
+            }
+        });
+
+        document.getElementById("readSessionStorage")
+        .addEventListener("click", function(event) {
+            const username = sessionStorage.getItem("username");
+            const email = sessionStorage.getItem("email");
+
+            if(username && email) {
+                document.getElementById("sessionStorageResult")
+                .innerText = `Username :  ${username}, email : ${email}`;
+            } else {
+                document.getElementById("sessionStorageResult")
+                .innerText = "사용자 정보를 찾을 수 없습니다."
+            }
+        });
+
+        document.getElementById("deleteSessionStorage")
+        .addEventListener("click", function(event) {
+            sessionStorage.removeItem("username");
+            sessionStorage.removeItem("email");
+
+            document.getElementById("sessionStorageResult")
+            .innerText = "사용자 정보가 삭제되었습니다."
+        })
 
     </script>
 </body>
